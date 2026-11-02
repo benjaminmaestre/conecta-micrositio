@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/jaime-andres-calle", "destination": "/index.html" },
+    { "source": "/jaime-andres-calle/", "destination": "/index.html" }
+  ]
+}
