@@ -308,7 +308,7 @@
         </div>
 
         <div class="status"><i></i> Disponible para asesorarte</div>
-        <h1>Natalia Andrés <span>Calle</span></h1>
+        <h1>Natalia <span>Echeverri</span></h1>
         <div class="role-row">
           <span class="role">Agente</span>
           <span class="loc">
@@ -508,7 +508,7 @@
     var vcard=[
       'BEGIN:VCARD','VERSION:3.0',
       'FN:Natalia Echeverri',
-      'N:Calle;Natalia Andrés;;;',
+      'N:Echeverri;Natalia;;;',
       'TITLE:Agente',
       'ORG:Conecta Negocios Eficientes',
       'TEL;TYPE=CELL,VOICE:+573052005544',
@@ -526,7 +526,7 @@
       return;
     }
     var a=document.createElement('a');
-    a.href=url; a.download='Natalia-Andres-Calle-Conecta.vcf';
+    a.href=url; a.download='Natalia-Echeverri-Conecta.vcf';
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function(){ URL.revokeObjectURL(url); }, 1200);
     showToast('Contacto guardado en tu dispositivo ✓', 2600);
