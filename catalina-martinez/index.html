@@ -427,7 +427,7 @@
   </a>
 </div>
 
-<div class="toast" id="toast" role="status">Contacto guardado en tu dispositivo ✓</div>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
 (function(){
@@ -520,8 +520,7 @@
     var url=URL.createObjectURL(blob);
     var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
     if(isIOS){
-      showToast('Abriendo la ficha de contacto…', 3200);
-      pendienteGuardado=Date.now();
+      showToast('En la ficha que se abre, toca «Crear nuevo contacto» para guardarme', 3400);
       setTimeout(function(){ window.location.href=url; }, 60);
       setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
       return;
@@ -531,18 +530,7 @@
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function(){ URL.revokeObjectURL(url); }, 1200);
     showToast('Tarjeta descargada: ábrela para guardar el contacto', 3400);
-    pendienteGuardado=Date.now();
   }
-  var pendienteGuardado=0;
-  function confirmarGuardado(){
-    if(pendienteGuardado && Date.now()-pendienteGuardado>2000){
-      pendienteGuardado=0;
-      showToast('Contacto guardado en tu dispositivo ✓', 2600);
-    }
-  }
-  document.addEventListener('visibilitychange', function(){ if(!document.hidden) confirmarGuardado(); });
-  window.addEventListener('focus', confirmarGuardado);
-  window.addEventListener('pageshow', confirmarGuardado);
   var saveButtons=document.querySelectorAll('.save-contact');
   for(var s=0;s<saveButtons.length;s++) saveButtons[s].addEventListener('click', saveContact);
 })();
