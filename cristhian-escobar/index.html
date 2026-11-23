@@ -521,6 +521,7 @@
     var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
     if(isIOS){
       showToast('Abriendo la ficha de contacto…', 3200);
+      pendienteGuardado=Date.now();
       setTimeout(function(){ window.location.href=url; }, 60);
       setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
       return;
@@ -529,8 +530,19 @@
     a.href=url; a.download='Cristhian-Escobar-Conecta.vcf';
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function(){ URL.revokeObjectURL(url); }, 1200);
-    showToast('Contacto guardado en tu dispositivo ✓', 2600);
+    showToast('Tarjeta descargada: ábrela para guardar el contacto', 3400);
+    pendienteGuardado=Date.now();
   }
+  var pendienteGuardado=0;
+  function confirmarGuardado(){
+    if(pendienteGuardado && Date.now()-pendienteGuardado>2000){
+      pendienteGuardado=0;
+      showToast('Contacto guardado en tu dispositivo ✓', 2600);
+    }
+  }
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) confirmarGuardado(); });
+  window.addEventListener('focus', confirmarGuardado);
+  window.addEventListener('pageshow', confirmarGuardado);
   var saveButtons=document.querySelectorAll('.save-contact');
   for(var s=0;s<saveButtons.length;s++) saveButtons[s].addEventListener('click', saveContact);
 })();
